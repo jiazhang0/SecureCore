@@ -1,0 +1,22 @@
+source poky/oe-init-build-env build-secure-core
+
+bitbake-layers add-layer ../meta-openembedded/meta-oe
+bitbake-layers add-layer ../meta-secure-core/meta
+bitbake-layers add-layer ../meta-secure-core/meta-signing-key
+bitbake-layers add-layer ../meta-secure-core/meta-tpm
+bitbake-layers add-layer ../meta-secure-core/meta-tpm2
+bitbake-layers add-layer ../meta-secure-core/meta-efi-secure-boot
+bitbake-layers add-layer ../meta-secure-core/meta-integrity
+bitbake-layers add-layer ../meta-secure-core/meta-encrypted-storage
+
+cat <<EOF>>conf/local.conf
+
+# SecureCore-specific settings
+MACHINE = "qemux86-64"
+DISTRO_FEATURES_append += " ima tpm tpm2 efi-secure-boot encrypted-storage"
+SECURE_CORE_IMAGE_EXTRA_INSTALL ?= ""
+DEBUG_FLAGS_forcevariable = ""
+
+EOF
+
+touch .configured
