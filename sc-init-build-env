@@ -14,7 +14,13 @@ cat <<EOF>>conf/local.conf
 # SecureCore-specific settings
 MACHINE = "qemux86-64"
 DISTRO_FEATURES_append += " ima tpm tpm2 efi-secure-boot encrypted-storage"
-SECURE_CORE_IMAGE_EXTRA_INSTALL ?= ""
+SECURE_CORE_IMAGE_EXTRA_INSTALL ?= "\
+    packagegroup-efi-secure-boot \
+    packagegroup-tpm \
+    packagegroup-tpm2 \
+    packagegroup-ima \
+    packagegroup-encrypted-storage \
+"
 DEBUG_FLAGS_forcevariable = ""
 
 EOF
