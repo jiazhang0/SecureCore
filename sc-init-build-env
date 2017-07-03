@@ -9,6 +9,10 @@ bitbake-layers add-layer ../meta-secure-core/meta-efi-secure-boot
 bitbake-layers add-layer ../meta-secure-core/meta-integrity
 bitbake-layers add-layer ../meta-secure-core/meta-encrypted-storage
 
+S="${BASH_SOURCE[0]}"
+D=`dirname "$S"`
+SECURE_CORE_ROOT="`cd "$D"/.. && pwd`"
+
 cat <<EOF>>conf/local.conf
 
 # SecureCore-specific settings
@@ -25,5 +29,9 @@ SECURE_CORE_IMAGE_EXTRA_INSTALL ?= "\
 DEBUG_FLAGS_forcevariable = ""
 
 EOF
+
+if [ -s "$SECURE_CORE_ROOT/extra-init-build-env" ]; then
+    cat "$SECURE_CORE_ROOT/extra-init-build-env" >> conf/local.conf
+fi
 
 touch .configured
