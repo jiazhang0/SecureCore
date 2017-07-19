@@ -1,7 +1,6 @@
 source poky/oe-init-build-env build-secure-core
 
 bitbake-layers add-layer ../meta-openembedded/meta-oe
-bitbake-layers add-layer ../meta-secure-core
 bitbake-layers add-layer ../meta-secure-core/meta
 bitbake-layers add-layer ../meta-secure-core/meta-signing-key
 bitbake-layers add-layer ../meta-secure-core/meta-tpm
