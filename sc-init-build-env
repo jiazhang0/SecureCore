@@ -1,6 +1,7 @@
 source poky/oe-init-build-env build-secure-core
 
 bitbake-layers add-layer ../meta-openembedded/meta-oe
+bitbake-layers add-layer ../meta-secure-core
 bitbake-layers add-layer ../meta-secure-core/meta
 bitbake-layers add-layer ../meta-secure-core/meta-signing-key
 bitbake-layers add-layer ../meta-secure-core/meta-tpm
@@ -18,6 +19,7 @@ cat <<EOF>>conf/local.conf
 # SecureCore-specific settings
 MACHINE_forcevariable = "qemux86-64"
 INITRAMFS_IMAGE = "secure-core-image-initramfs"
+DISTRO_FEATURES_NATIVE_append += " ima tpm tpm2 efi-secure-boot encrypted-storage"
 DISTRO_FEATURES_append += " ima tpm tpm2 efi-secure-boot encrypted-storage"
 SECURE_CORE_IMAGE_EXTRA_INSTALL ?= "\
     packagegroup-efi-secure-boot \
@@ -27,6 +29,8 @@ SECURE_CORE_IMAGE_EXTRA_INSTALL ?= "\
     packagegroup-encrypted-storage \
 "
 DEBUG_FLAGS_forcevariable = ""
+RPM_GPG_NAME ??= ""
+RPM_GPG_PASSPHRASE ??= ""
 
 EOF
 
