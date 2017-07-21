@@ -11,12 +11,7 @@ MACHINE_forcevariable = "qemux86-64"
 INITRAMFS_IMAGE = "secure-core-image-initramfs"
 DISTRO_FEATURES_NATIVE_append += " ima tpm tpm2 efi-secure-boot encrypted-storage"
 DISTRO_FEATURES_append += " ima tpm tpm2 efi-secure-boot encrypted-storage"
-SECURE_CORE_IMAGE_EXTRA_INSTALL ?= "\
-    packagegroup-efi-secure-boot \
-    packagegroup-tpm \
-    packagegroup-tpm2 \
-    packagegroup-ima \
-    packagegroup-encrypted-storage \
+SECURE_CORE_IMAGE_EXTRA_INSTALL_append += "\
 "
 
 RPM_GPG_NAME ??= ""
