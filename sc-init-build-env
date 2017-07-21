@@ -1,14 +1,5 @@
 source poky/oe-init-build-env build-secure-core
 
-bitbake-layers add-layer ../meta-openembedded/meta-oe
-bitbake-layers add-layer ../meta-secure-core/meta
-bitbake-layers add-layer ../meta-secure-core/meta-signing-key
-bitbake-layers add-layer ../meta-secure-core/meta-tpm
-bitbake-layers add-layer ../meta-secure-core/meta-tpm2
-bitbake-layers add-layer ../meta-secure-core/meta-efi-secure-boot
-bitbake-layers add-layer ../meta-secure-core/meta-integrity
-bitbake-layers add-layer ../meta-secure-core/meta-encrypted-storage
-
 S="${BASH_SOURCE[0]}"
 D=`dirname "$S"`
 SECURE_CORE_ROOT="`cd "$D"/.. && pwd`"
@@ -27,14 +18,25 @@ SECURE_CORE_IMAGE_EXTRA_INSTALL ?= "\
     packagegroup-ima \
     packagegroup-encrypted-storage \
 "
-DEBUG_FLAGS_forcevariable = ""
+
 RPM_GPG_NAME ??= ""
 RPM_GPG_PASSPHRASE ??= ""
+
+DEBUG_FLAGS_forcevariable = ""
 
 EOF
 
 if [ -s "$SECURE_CORE_ROOT/extra-init-build-env" ]; then
     cat "$SECURE_CORE_ROOT/extra-init-build-env" >> conf/local.conf
 fi
+
+bitbake-layers add-layer ../meta-openembedded/meta-oe
+bitbake-layers add-layer ../meta-secure-core/meta
+bitbake-layers add-layer ../meta-secure-core/meta-signing-key
+bitbake-layers add-layer ../meta-secure-core/meta-tpm
+bitbake-layers add-layer ../meta-secure-core/meta-tpm2
+bitbake-layers add-layer ../meta-secure-core/meta-efi-secure-boot
+bitbake-layers add-layer ../meta-secure-core/meta-integrity
+bitbake-layers add-layer ../meta-secure-core/meta-encrypted-storage
 
 touch .configured
