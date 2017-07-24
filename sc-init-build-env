@@ -28,6 +28,7 @@ if [ -s "$SECURE_CORE_ROOT/extra-init-build-env" ]; then
 fi
 
 bitbake-layers add-layer ../meta-openembedded/meta-oe
+bitbake-layers add-layer ../meta-openembedded/meta-perl
 bitbake-layers add-layer ../meta-secure-core/meta
 bitbake-layers add-layer ../meta-secure-core/meta-signing-key
 bitbake-layers add-layer ../meta-secure-core/meta-tpm
