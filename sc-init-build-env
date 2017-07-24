@@ -11,6 +11,8 @@ MACHINE_forcevariable = "qemux86-64"
 INITRAMFS_IMAGE = "secure-core-image-initramfs"
 DISTRO_FEATURES_NATIVE_append += " ima tpm tpm2 efi-secure-boot encrypted-storage"
 DISTRO_FEATURES_append += " ima tpm tpm2 efi-secure-boot encrypted-storage"
+MACHINE_FEATURES_NATIVE_append += " efi"
+MACHINE_FEATURES_append += " efi"
 SECURE_CORE_IMAGE_EXTRA_INSTALL_append += "\
 "
 
