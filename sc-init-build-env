@@ -43,4 +43,10 @@ bitbake-layers add-layer ../meta-secure-core/meta-efi-secure-boot
 bitbake-layers add-layer ../meta-secure-core/meta-integrity
 bitbake-layers add-layer ../meta-secure-core/meta-encrypted-storage
 
+cat <<EOF>>conf/local.conf
+
+INHERIT += "sign_rpm_ext"
+
+EOF
+
 touch .configured
