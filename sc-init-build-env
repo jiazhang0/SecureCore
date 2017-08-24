@@ -33,15 +33,28 @@ if [ -s "$SECURE_CORE_ROOT/extra-init-build-env" ]; then
     cat "$SECURE_CORE_ROOT/extra-init-build-env" >> conf/local.conf
 fi
 
-bitbake-layers add-layer ../meta-openembedded/meta-oe
-bitbake-layers add-layer ../meta-openembedded/meta-perl
-bitbake-layers add-layer ../meta-secure-core/meta
-bitbake-layers add-layer ../meta-secure-core/meta-signing-key
-bitbake-layers add-layer ../meta-secure-core/meta-tpm
-bitbake-layers add-layer ../meta-secure-core/meta-tpm2
-bitbake-layers add-layer ../meta-secure-core/meta-efi-secure-boot
-bitbake-layers add-layer ../meta-secure-core/meta-integrity
-bitbake-layers add-layer ../meta-secure-core/meta-encrypted-storage
+LAYERS="\
+    meta-openembedded/meta-oe \
+    meta-openembedded/meta-perl \
+    meta-openembedded/meta-networking \
+    meta-openembedded/meta-python \
+    meta-secure-core/meta \
+    meta-secure-core/meta-signing-key \
+    meta-secure-core/meta-tpm \
+    meta-secure-core/meta-tpm2 \
+    meta-secure-core/meta-efi-secure-boot \
+    meta-secure-core/meta-integrity \
+    meta-secure-core/meta-encrypted-storage \
+    meta-secure-core/meta-ids \
+"
+
+for layer in `echo -n $LAYERS | tac`; do
+    if [ -e ../$layer ]; then
+        sed -i \
+            "s#^\(.*\)poky/meta-yocto-bsp\(.*\)#\1$layer \\\\\n\1poky/meta-yocto-bsp\2#" \
+            conf/bblayers.conf
+    fi
+done
 
 cat <<EOF>>conf/local.conf
 
