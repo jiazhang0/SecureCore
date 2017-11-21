@@ -14,7 +14,7 @@ INITRAMFS_IMAGE = "secure-core-image-initramfs"
 VIRTUAL-RUNTIME_init_manager = "systemd"
 
 DISTRO_FEATURES_NATIVE_append += "systemd ima tpm tpm2 efi-secure-boot luks"
-DISTRO_FEATURES_append += "systemd ima tpm tpm2 efi-secure-boot luks"
+DISTRO_FEATURES_append += "systemd ima tpm tpm2 efi-secure-boot luks modsign"
 
 MACHINE_FEATURES_NATIVE_append += "efi"
 MACHINE_FEATURES_append += "efi"
