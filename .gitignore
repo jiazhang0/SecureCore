@@ -1,2 +1,4 @@
 build-secure-core
 extra-init-build-env
+bitbake-cookerdaemon.log
+*.patch
