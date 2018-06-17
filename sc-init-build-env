@@ -64,6 +64,10 @@ cat <<EOF>>conf/local.conf
 
 INHERIT += "sign_rpm_ext"
 
+#PREFERRED_VERSION_tpm2-tss = "git"
+#PREFERRED_VERSION_tpm2-abrmd = "git"
+#PREFERRED_VERSION_tpm2-tools = "git"
+
 EOF
 
 touch .configured
